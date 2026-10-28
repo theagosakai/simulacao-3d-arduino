@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #dce4e6;
+  background: #101417;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+html, body, #app { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+button, input, select { font: inherit; }
+button { color: inherit; cursor: pointer; }
+
+#app {
+  display: grid;
+  grid-template-columns: 52px 190px minmax(400px, 1fr) 260px;
+  grid-template-rows: 48px minmax(0, 1fr) 24px;
+  grid-template-areas:
+    "top top top top"
+    "rail layers viewport inspector"
+    "status status status status";
+  background: #101417;
+}
+
+.topbar {
+  grid-area: top;
+  display: grid;
+  grid-template-columns: 242px 1fr auto;
+  align-items: center;
+  height: 48px;
+  padding: 0 10px 0 12px;
+  border-bottom: 1px solid #293238;
+  background: #171c20;
+}
+.brand { display: flex; align-items: center; gap: 9px; font-size: 14px; letter-spacing: -.2px; }
+.brand b { color: #69c8d8; }
+.brand-mark {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px;
+  background: linear-gradient(145deg, #1e8e99, #12606a); color: white; font-weight: 800; font-size: 16px;
+}
+.file-name { justify-self: center; font-family: "JetBrains Mono", monospace; font-size: 11px; color: #929ea2; }
+.status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 5px; border-radius: 50%; background: #64b9a8; }
+.top-actions { display: flex; align-items: center; gap: 5px; }
+.top-actions button, .view-toolbar button {
+  border: 0; background: transparent; height: 32px; min-width: 32px; border-radius: 6px;
+}
+.top-actions button:hover, .view-toolbar button:hover { background: #283137; }
+.top-actions .run-button {
+  height: 34px; padding: 0 12px; margin-left: 5px;
+  background: #16818a; font-weight: 600; color: white;
+}
+.top-actions .run-button.active { background: #b84f4f; }
+.run-button span { margin-right: 4px; }
+
+.rail {
+  grid-area: rail; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 6px; border-right: 1px solid #293238; background: #171c20;
+}
+.rail-button {
+  width: 38px; height: 38px; border: 0; border-radius: 7px; background: transparent;
+  font-size: 18px; color: #aebabc;
+}
+.rail-button:hover { background: #252d32; color: #fff; }
+.rail-button.active { background: #244950; color: #74d1df; box-shadow: inset 2px 0 #5fc1cf; }
+.rail-spacer { flex: 1; }
+
+.layers {
+  grid-area: layers; padding: 14px 12px; border-right: 1px solid #293238; background: #151a1d;
+}
+.layers h2 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9ba7aa; }
+.layers label { display: flex; align-items: center; gap: 8px; height: 31px; font-size: 12px; color: #c3ccce; }
+.layers input { accent-color: #58aeb9; }
+.component-list { margin-top: 18px; padding-top: 12px; border-top: 1px solid #293238; }
+.component-list h3 { margin: 0 0 8px; font-size: 11px; color: #77868a; text-transform: uppercase; }
+.component-list button { width: 100%; height: 34px; margin: 2px 0; border: 1px solid transparent; border-radius: 5px;
+  background: transparent; text-align: left; font-size: 11px; color: #b8c4c6; }
+.component-list button:hover { border-color: #35545a; background: #1d272b; }
+
+#viewport { grid-area: viewport; position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+#scene { display: block; width: 100%; height: 100%; }
+.view-toolbar {
+  position: absolute; right: 12px; top: 12px; display: flex; gap: 2px; padding: 3px;
+  border: 1px solid #303a40; border-radius: 7px; background: rgba(22,27,30,.92);
+}
+.axis-gizmo { position: absolute; left: 17px; bottom: 15px; width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid rgba(145,165,170,.14); }
+.axis-gizmo span {
+  position: absolute; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%;
+  font-family: "JetBrains Mono"; font-size: 8px; font-weight: 700; color: white;
+}
+.axis-x { right: -5px; top: 18px; background: #b44b51; }
+.axis-y { left: 17px; top: -8px; background: #4a9a72; }
+.axis-z { left: 5px; bottom: 3px; background: #477cc1; }
+
+.inspector {
+  grid-area: inspector; border-left: 1px solid #293238; background: #171c20; min-width: 0;
+}
+.tabs { display: flex; height: 43px; border-bottom: 1px solid #293238; }
+.tabs button { flex: 1; border: 0; border-bottom: 2px solid transparent; background: transparent; font-size: 11px; color: #87959a; }
+.tabs button.active { border-bottom-color: #69bdc8; color: #dbe5e7; }
+.inspector-body { padding: 12px; }
+.selected-card { display: flex; align-items: center; gap: 9px; height: 58px; margin-bottom: 14px;
+  padding: 8px; border: 1px solid #303b40; border-radius: 7px; background: #1c2327; }
+.chip-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 5px;
+  background: #2b3438; color: #79c8d3; font-family: serif; font-size: 20px; }
+.selected-card strong, .selected-card small { display: block; }
+.selected-card strong { font-size: 12px; }
+.selected-card small { margin-top: 4px; font-size: 9px; color: #89979b; }
+.inspector label { display: block; margin: 12px 0 6px; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: #879499; }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.field-grid div { display: grid; grid-template-columns: 25px 1fr; align-items: center; height: 34px; border: 1px solid #303b40; border-radius: 5px; }
+.field-grid span { text-align: center; font-size: 9px; color: #77878b; }
+.field-grid input { width: 100%; height: 32px; border: 0; outline: 0; background: transparent; color: #dce4e6; font-size: 11px; font-family: "JetBrains Mono"; }
+.range-row { display: grid; grid-template-columns: 1fr 46px; align-items: center; }
+.range-row input { accent-color: #61adba; width: 100%; }
+.range-row output { text-align: right; font-size: 11px; color: #b4c0c2; }
+.inspector select { width: 100%; height: 34px; border: 1px solid #303b40; border-radius: 5px; background: #20272a; color: #c8d2d4; padding: 0 8px; font-size: 11px; }
+.spec { display: flex; justify-content: space-between; height: 29px; align-items: center; border-bottom: 1px solid #252d31; font-size: 10px; }
+.spec span { color: #829196; }.spec b { color: #bdc8ca; font-weight: 500; }
+
+.statusbar {
+  grid-area: status; display: flex; align-items: center; gap: 22px; padding: 0 10px;
+  border-top: 1px solid #293238; background: #171c20; font-size: 9px; color: #829096;
+}
+.statusbar span:first-child { color: #8abdab; }
+.statusbar b { margin-left: 4px; color: #b6c1c3; font-family: "JetBrains Mono"; font-weight: 500; }
+.status-right { margin-left: auto; }
